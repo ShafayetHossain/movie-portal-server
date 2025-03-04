@@ -21,12 +21,16 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    await client.connect();
-    await client.db("novieDB").command({ ping: 1 });
-    console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!"
-    );
+    // await client.connect();
+    // await client.db("novieDB").command({ ping: 1 });
+    // console.log(
+    //   "Pinged your deployment. You successfully connected to MongoDB!"
+    // );
     const movieCollection = client.db("movieDB").collection("movies");
+
+    app.get("/", async (req, res) => {
+      res.send("Movie Portal Home");
+    });
 
     app.get("/movie", async (req, res) => {
       const { searchEmail, searchMovie } = req.query;
